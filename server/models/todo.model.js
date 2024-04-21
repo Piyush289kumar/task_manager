@@ -1,5 +1,4 @@
 import mongoose, { Schema, model } from "mongoose";
-
 const todoSchema = new Schema(
   {
     task: {
@@ -9,5 +8,4 @@ const todoSchema = new Schema(
   },
   { timestamps: true }
 );
-
 export const Todo = model("Todo", todoSchema);
