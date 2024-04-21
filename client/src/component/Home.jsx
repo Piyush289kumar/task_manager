@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BsCircleFill, BsFillTrash2Fill } from "react-icons/bs";
 import { Create } from "./index";
 import axios from "axios";
 function Home() {
@@ -16,7 +17,19 @@ function Home() {
       {todos.length <= 0 ? (
         <h2>No Record Found...!</h2>
       ) : (
-        todos.map((todoTask, idx) => <div key={idx}>{todoTask.task}</div>)
+        todos.map((todoTask, idx) => (
+          <div className="task" key={idx}>
+            <div className="checkbox">
+              <BsCircleFill className="icon" />
+              {todoTask.task}
+            </div>
+            <div>
+              <span>
+                <BsFillTrash2Fill className="icon" />
+              </span>
+            </div>
+          </div>
+        ))
       )}
     </div>
   );
