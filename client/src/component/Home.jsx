@@ -19,6 +19,13 @@ function Home() {
       .catch((err) => console.log(err));
   };
 
+  const deleteHandler = (id) => {
+    axios
+      .delete("http://127.0.0.1:3001/delete/" + id)
+      .then(() => location.reload())
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="home">
       <h2>TODO List</h2>
@@ -38,7 +45,10 @@ function Home() {
             </div>
             <div>
               <span>
-                <BsFillTrash2Fill className="icon" />
+                <BsFillTrash2Fill
+                  className="icon"
+                  onClick={() => deleteHandler(todoTask._id)}
+                />
               </span>
             </div>
           </div>
