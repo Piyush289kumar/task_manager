@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 function Create() {
   const [todo, setTodo] = useState("");
@@ -6,7 +6,7 @@ function Create() {
   const addHandle = () => {
     axios
       .post("http://127.0.0.1:3001/add", { task: todo })
-      .then((res) => console.log(res))
+      .then((res) => location.reload())
       .catch((err) => console.log(err));
   };
 

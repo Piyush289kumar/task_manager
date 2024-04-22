@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsCircleFill, BsFillTrash2Fill } from "react-icons/bs";
+import { FaRegCheckCircle } from "react-icons/fa";
 import { Create } from "./index";
 import axios from "axios";
 function Home() {
@@ -10,6 +11,14 @@ function Home() {
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  const doneHandler = (id) => {
+    axios
+      .put("http://127.0.0.1:3001/update/" + id)
+      .then((result) => location.reload())
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="home">
       <h2>TODO List</h2>
@@ -19,9 +28,13 @@ function Home() {
       ) : (
         todos.map((todoTask, idx) => (
           <div className="task" key={idx}>
-            <div className="checkbox">
-              <BsCircleFill className="icon" />
-              {todoTask.task}
+            <div className="checkbox" onClick={() => doneHandler(todoTask._id)}>
+              {todoTask.done ? (
+                <FaRegCheckCircle className="icon" />
+              ) : (
+                <BsCircleFill className="icon" />
+              )}
+              <p className={todoTask.done ? "taskDone" : ""}>{todoTask.task}</p>
             </div>
             <div>
               <span>

@@ -22,6 +22,14 @@ app.post("/add", (req, res) => {
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });
+
+app.put("/update/:id", (req, res) => {
+  const { id } = req.params;
+  Todo.findByIdAndUpdate({ _id: id }, { done: true })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is Running of PORT : ${PORT}`);
 });

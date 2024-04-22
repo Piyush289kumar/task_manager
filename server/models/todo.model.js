@@ -5,6 +5,10 @@ const todoSchema = new Schema(
       type: String,
       required: true,
     },
+    done: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
