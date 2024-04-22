@@ -1,5 +1,6 @@
+import { useState } from "react";
 import "./App.css";
-import { Home } from "./components";
+import { Home } from "./component";
 
 function App() {
   return (

@@ -1,43 +1,42 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
-import { Todo } from "./models/tood.model.js";
-
+import mongoose from "mongoose";
+import { Todo } from "./models/todo.model.js";
 const PORT = 3001;
-
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 mongoose.connect(
   "mongodb+srv://piyushraikwar289:piyush289@cluster0.5lpcsrr.mongodb.net/"
 );
-
-app.get("/", (_, res) => {
+app.get("/get", (_, res) => {
   Todo.find()
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(500).json(err.message));
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 });
 app.post("/add", (req, res) => {
-  Todo.create({ task: req.body.task })
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(500).json(err.message));
+  const task = req.body.task;
+  Todo.create({
+    task,
+  })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 });
 
 app.put("/update/:id", (req, res) => {
   const { id } = req.params;
-  Todo.findByIdAndUpdate({ _id: id }, { isTaskDone: true })
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(401).json(err));
+  Todo.findByIdAndUpdate({ _id: id }, { done: true })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 });
 
 app.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   Todo.findByIdAndDelete({ _id: id })
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(401).json(err));
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is Running of PORT : ${PORT}`);
 });
